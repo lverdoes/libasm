@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/29 13:35:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/12 10:22:12 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/12 12:48:46 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,8 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 clean:
-	rm -f $(OBJS)
-	rm -f $(BONUS_OBJS)
+	rm -f $(OBJ)
+	rm -f $(BONUS_OBJ)
 
 fclean: clean
 	rm -f $(NAME)
