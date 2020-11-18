@@ -6,23 +6,17 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/29 14:00:09 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/12 12:43:38 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/18 11:42:10 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libasm.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
-
-size_t				ft_strlen(const char *s);
-char				*ft_strcpy(char *dst, const char *src);
-char 				*ft_strdup(const char *s1);
-int					ft_strcmp(const char *s1, const char *s2);
-ssize_t				ft_read(int fildes, void *buf, size_t nbyte);
-ssize_t				ft_write(int fildes, const void *buf, size_t nbyte);
 
 static void	test_ft_strlen(void)
 {
@@ -449,11 +443,11 @@ static void	test_ft_write(void)
 
 int main(void)
 {
-	test_ft_strlen();
-	test_ft_strcpy();
-	test_ft_strdup();
-	test_ft_strcmp();
-	test_ft_read();
-	test_ft_write();
+//	test_ft_strlen();
+//	test_ft_strcpy();
+//	test_ft_strdup();
+//	test_ft_strcmp();
+//	test_ft_read();
+//	test_ft_write();
     return (0);
 }

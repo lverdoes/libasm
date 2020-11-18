@@ -17,21 +17,18 @@ section .text
 	extern	_malloc
 
 _ft_strdup:
-	push	rbp
-	mov		rbp, rsp
-	sub		rsp, 8
-	mov		[rsp], rdi
-	call 	_ft_strlen		; get len
-	mov		rdi, rax
+	push	rdi
+	call 	_ft_strlen
+	mov		rdi, rax		
 	inc		rdi
-	call	_malloc			; call malloc with argument rdi (strlen + 1)
-	cmp		rax, 0			; malloc error check
-	je		return			; if malloc error, exit
-	mov		rdi, rax		; rdi now points to dst
-	mov		rsi, [rsp]		; rsi now points to src
-	call	_ft_strcpy		; copy rsi to rdi and rax points to dst
-return:
-	add		rsp, 8
-	mov		rsp, rbp
-	pop		rbp
+	call	_malloc
+	cmp		rax, 0
+	je		error
+	mov		rdi, rax
+	pop		rsi
+	call	_ft_strcpy
+	ret
+
+error:
+	pop		rdi
 	ret

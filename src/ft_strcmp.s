@@ -14,31 +14,20 @@ section .text
 	global	_ft_strcmp
 
 _ft_strcmp:						
-	xor 	rcx, rcx
-	xor		rdx, rdx
 	xor		rax, rax
+	xor 	rcx, rcx
+	xor 	rdx, rdx
 
 loop:
-	mov 	dl, BYTE [rdi + rcx]
-	cmp 	dl, BYTE [rsi + rcx]
-	ja		return_below
-	jb		return_above
-	cmp		dl, 0
-	je		return_equal
+	movsx 	rax, BYTE [rdi + rcx]
+	movsx 	rdx, BYTE [rsi + rcx]
+	cmp		rax, 0
+	je		return
+	cmp 	rax, rdx
+	jne		return
 	inc		rcx
 	jmp		loop
 
-return_below:
-	sub		dl, BYTE [rsi + rcx]
-	mov		rax, rdx
-	ret
-
-return_above:
-;	mov		dl, BYTE [rsi + rcx]
-	sub		dl, BYTE [rsi + rcx]
-	mov		rax, rdx
-	ret
-
-return_equal:
-	xor		rax, rax
+return:
+	sub		rax, rdx
 	ret
