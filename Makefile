@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/29 13:35:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/12 12:48:46 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/20 23:30:33 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ clean:
 	rm -f $(OBJ)
 	rm -f $(BONUS_OBJ)
 
-fclean: clean
+fclean: clean untest
 	rm -f $(NAME)
 	rm -f test
 	rm -f test_bonus
@@ -58,7 +58,20 @@ re: fclean all
 
 .PHONY: all clean fclean re bonus
 
-test: all
-	@$(CC) $(FLAGS) $(UNUSED) $(NAME) -o test ./test_files/main.c
+test: all untest
+	@$(CC) $(FLAGS) $(UNUSED) $(NAME) -o test ./test_files/*.c
+	@touch ./test_files/normal_test
+	@touch ./test_files/more_write_than_read_chars
+	@mkdir -p ./test_files/'.dir'
+	@touch ./test_files/NO_PERMISSION
+	@chmod 001 ./test_files/NO_PERMISSION
 	@./test
-	@rm -rf test
+	@make untest
+
+untest:	
+	@rm -rf test 
+	@rm -rf ./test_files/normal_test
+	@rm -rf ./test_files/more_write_than_read_chars
+	@rm -rf ./test_files/file_does_not_exist
+	@rm -rf ./test_files/.dir
+	@rm -rf ./test_files/NO_PERMISSION

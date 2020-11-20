@@ -17,8 +17,8 @@ section .text
 	extern	_malloc
 
 _ft_strdup:
-	push	rdi
 	call 	_ft_strlen
+	push	rdi
 	mov		rdi, rax		
 	inc		rdi
 	call	_malloc
