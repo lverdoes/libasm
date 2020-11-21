@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 11:33:12 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/20 23:30:58 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/21 13:16:03 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	test_ft_read(void)
 		close(fd);
 		printf("\tTest [%d]:", i);
         if (!strncmp(read_buffer[0], read_buffer[1], BUFFER_SIZE + 1) && function_ret[0] == function_ret[1] && error_ret[0] == error_ret[1])
-        	printf("\t\t[OK]\n");
+        	printf("\t[OK]\n");
         else
         {
-            printf("\t\t[FAIL]\n");
+            printf("\t[FAIL]\n");
             printf("ft_: ret:[%d] errno:[%s]\n", function_ret[0], strerror(error_ret[0]));
 			printf("man: ret:[%d] errno:[%s]\n", function_ret[1], strerror(error_ret[1]));
             printf("ft_read buffer = [%s]\n", read_buffer[0]);

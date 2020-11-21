@@ -1,25 +1,26 @@
 ;# **************************************************************************** #
 ;#                                                                              #
 ;#                                                         ::::::::             #
-;#    ft_strlen.s                                        :+:    :+:             #
+;#    ft_lst_size.s                                      :+:    :+:             #
 ;#                                                      +:+                     #
 ;#    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 ;#                                                    +#+                       #
-;#    Created: 2020/09/29 15:03:35 by lverdoes      #+#    #+#                  #
-;#    Updated: 2020/09/29 15:03:37 by lverdoes      ########   odam.nl          #
+;#    Created: 2020/11/21 14:43:04 by lverdoes      #+#    #+#                  #
+;#    Updated: 2020/11/21 14:43:06 by lverdoes      ########   odam.nl          #
 ;#                                                                              #
 ;# **************************************************************************** #
 
 section .text
-	global	_ft_strlen
+	global _ft_lst_size
 
-_ft_strlen:
-	xor 	rax, rax				
+_ft_lst_size:                       ; rdi = t_list *head
+	xor     rax, rax
 
 loop:
-	cmp 	BYTE [rdi + rax], 0
+	cmp		rdi, 0
 	je		return
 	inc		rax
+	mov		rdi, [rdi + 8]
 	jmp		loop
 
 return:

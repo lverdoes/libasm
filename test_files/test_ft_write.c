@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 11:33:47 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/20 23:30:46 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/21 13:15:57 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	test_ft_write(void)
 		
 		printf("\tTest [%d]:", i);
 		if (ret[0] == ret[2] && error_ret[0] == error_ret[1] && !strncmp(read_buffer[0], read_buffer[1], BUFFER_SIZE + 1))
-			printf("\t\t[OK]\n");
+			printf("\t[OK]\n");
 		else
 		{
-			printf("\t\t[FAIL]\n");
+			printf("\t[FAIL]\n");
 			printf("ft_: write_ret[0] = [%2d]\tread_ret[1] = [%2d]\terrno:[%s]\n", ret[0], ret[1], strerror(error_ret[0]));
 			printf("man: write_ret[2] = [%2d]\tread_ret[3] = [%2d]\terrno:[%s]\n", ret[2], ret[3], strerror(error_ret[1]));
 			printf("ft_: write = [%s]\tread = [%s]\n", filename[i], read_buffer[0]);

@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/29 13:35:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/20 23:30:33 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/21 14:38:22 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,19 @@ SRC = \
 	ft_strcmp.o \
 	ft_strdup.o \
 	ft_read.o \
-	ft_write.o
+	ft_write.o \
+	ft_lst_size.o
+
+TEST_SRC = \
+	./test_files/main.c \
+	./test_files/lst_utils.c \
+	./test_files/test_ft_read.c \
+	./test_files/test_ft_strcmp.c \
+	./test_files/test_ft_strcpy.c \
+	./test_files/test_ft_strdup.c \
+	./test_files/test_ft_strlen.c \
+	./test_files/test_ft_write.c \
+	./test_files/test_ft_lst_size.c
 	
 OBJ = $(addprefix $(OBJDIR), $(SRC:.s=.o))
 
@@ -59,7 +71,7 @@ re: fclean all
 .PHONY: all clean fclean re bonus
 
 test: all untest
-	@$(CC) $(FLAGS) $(UNUSED) $(NAME) -o test ./test_files/*.c
+	@$(CC) $(FLAGS) $(UNUSED) $(NAME) -o test $(TEST_SRC)
 	@touch ./test_files/normal_test
 	@touch ./test_files/more_write_than_read_chars
 	@mkdir -p ./test_files/'.dir'
