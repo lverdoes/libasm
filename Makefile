@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/29 13:35:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/22 10:35:32 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/22 19:38:05 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRC = \
 	ft_strdup.o \
 	ft_read.o \
 	ft_write.o \
-	ft_lst_size.o
 
 TEST_SRC = \
 	./test_files/main.c \
@@ -32,7 +31,9 @@ TEST_SRC = \
 	./test_files/test_ft_strcpy.c \
 	./test_files/test_ft_strdup.c \
 	./test_files/test_ft_strlen.c \
-	./test_files/test_ft_write.c \
+	./test_files/test_ft_write.c
+
+TEST_BONUS_SRC = \
 	./test_files/test_ft_lst_size.c
 	
 OBJ = $(addprefix $(OBJDIR), $(SRC:.s=.o))
@@ -87,6 +88,10 @@ untest:
 	@rm -rf ./test_files/file_does_not_exist
 	@rm -rf ./test_files/.dir
 	@rm -rf ./test_files/NO_PERMISSION
+
+test_bonus: all
+	@$(CC) $(FLAGS) $(UNUSED) $(NAME) -o test_bonus $(TEST_BONUS_SRC)
+	@./test_bonus
 
 
 

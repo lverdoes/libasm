@@ -6,14 +6,18 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/22 10:36:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/22 10:37:50 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/22 19:33:39 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 section	.text:
 	global	_ft_list_sort
 
-_ft_list_sort:
+_ft_list_sort:					rdi = t_list **begin_list	rsi = int (*cmp)()
+	cmp		rdi, 0
+	je		ret
+	cmp		rsi, 0
+	je		ret
 	
 
 
