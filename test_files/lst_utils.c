@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/21 14:28:48 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/21 14:38:35 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/21 19:55:51 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,19 @@ void    ft_lstadd_back(t_list **alst, t_list *new)
     }
     else
         ft_lstadd_front(alst, new);
+}
+
+int		ft_lstsize(t_list *lst)
+{
+	int i;
+
+	i = 0;
+	if (!lst)
+		return (0);
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

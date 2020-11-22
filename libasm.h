@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/18 09:37:01 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/21 13:56:46 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/22 10:36:21 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ typedef struct      s_list{
     struct s_list   *next;
 }                   t_list;
 
-int                 ft_lst_size(t_list *head);
-int                 ft_atoi_base(char *str);
-
-// • ft_list_push_front (like the one in the piscine)
-// • ft_list_sort (like the one in the piscine)
-// • ft_list_remove_if (like the one in the piscine)
+int					ft_list_size(t_list *begin_list);
+void				ft_list_push_front(t_list **begin_list, void *data);
+void				ft_list_sort(t_list **begin_list, int (*cmp)());
+void				ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+int					ft_atoi_base(char *str, char *base);

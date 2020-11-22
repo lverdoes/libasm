@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/21 13:34:15 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/21 14:50:41 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/21 19:59:33 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,48 @@ void    print_list(t_list *head)
         printf("data = [%s]\n", tmp->data);
         tmp = tmp->next;
     }
-	printf("list size = [%d]\n", ft_lst_size(head));
 	printf("end\n");
 }
 
 void    test_ft_lst_size(void)
 {
-    t_list *head;
+    t_list *head = NULL;
 
-    head = ft_lstnew("hoi0");
-    print_list(head);
-	
+	printf("\nft_lst_size:\n\n");
+    
+    
+    printf("\tTest %d:", 0);
+    if (ft_lst_size(head) == ft_lstsize(head))
+        printf("\t[OK]\n");
+    else
+        printf("\t[FAIL]\n");
+        
+    printf("\tTest %d:", 1); 
     ft_lstadd_back(&head, ft_lstnew("hoi1"));
-    print_list(head);
+    if (ft_lst_size(head) == ft_lstsize(head))
+        printf("\t[OK]\n");
+    else
+        printf("\t[FAIL]\n");
+
+    printf("\tTest %d:", 2); 
     ft_lstadd_back(&head, ft_lstnew("hoi2"));
-    print_list(head);
+    if (ft_lst_size(head) == ft_lstsize(head))
+        printf("\t[OK]\n");
+    else
+        printf("\t[FAIL]\n");
+
+    printf("\tTest %d:", 3); 
     ft_lstadd_back(&head, ft_lstnew("hoi3"));
-    print_list(head);
+    if (ft_lst_size(head) == ft_lstsize(head))
+        printf("\t[OK]\n");
+    else
+        printf("\t[FAIL]\n");
+	
+    printf("\tTest %d:", 4); 
+    ft_lstadd_back(&head, ft_lstnew("hoi4"));
+    if (ft_lst_size(head) == ft_lstsize(head))
+        printf("\t[OK]\n");
+    else
+        printf("\t[FAIL]\n");
+    printf("\n");
 }

@@ -11,10 +11,10 @@
 ;# **************************************************************************** #
 
 section .text
-	global _ft_lst_size
+	global	_ft_lst_size
 
-_ft_lst_size:                       ; rdi = t_list *head
-	xor     rax, rax
+_ft_lst_size:
+	xor		rax, rax
 
 loop:
 	cmp		rdi, 0
