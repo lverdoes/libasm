@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/22 10:36:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/22 19:33:39 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/22 21:51:54 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,37 +19,6 @@ _ft_list_sort:					rdi = t_list **begin_list	rsi = int (*cmp)()
 	cmp		rsi, 0
 	je		ret
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
