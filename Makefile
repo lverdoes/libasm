@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/29 13:35:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/22 19:38:05 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/23 18:25:05 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRC = \
 	ft_strdup.o \
 	ft_read.o \
 	ft_write.o \
+	ft_list_size_bonus.o \
+	ft_list_push_front_bonus.o
 
 TEST_SRC = \
 	./test_files/main.c \
@@ -31,10 +33,12 @@ TEST_SRC = \
 	./test_files/test_ft_strcpy.c \
 	./test_files/test_ft_strdup.c \
 	./test_files/test_ft_strlen.c \
-	./test_files/test_ft_write.c
-
-TEST_BONUS_SRC = \
-	./test_files/test_ft_lst_size.c
+	./test_files/test_ft_write.c \
+	./test_files/test_ft_list_size.c \
+	./test_files/test_ft_list_push_front.c
+#	./test_files/test_ft_list_sort.c \
+#	./test_files/test_ft_list_remove_if.c \
+#	./test_files/test_ft_atoi_base.c
 	
 OBJ = $(addprefix $(OBJDIR), $(SRC:.s=.o))
 
@@ -88,10 +92,6 @@ untest:
 	@rm -rf ./test_files/file_does_not_exist
 	@rm -rf ./test_files/.dir
 	@rm -rf ./test_files/NO_PERMISSION
-
-test_bonus: all
-	@$(CC) $(FLAGS) $(UNUSED) $(NAME) -o test_bonus $(TEST_BONUS_SRC)
-	@./test_bonus
 
 
 

@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   test_ft_list_push_front.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/29 14:00:09 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/23 20:47:05 by lverdoes      ########   odam.nl         */
+/*   Created: 2020/11/23 17:51:55 by lverdoes      #+#    #+#                 */
+/*   Updated: 2020/11/23 20:46:23 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_libasm.h"
 
-int main(void)
+static void    print_list(t_list *list)
 {
-	// test_ft_strlen();
-	// test_ft_strcpy();
-	// test_ft_strdup();
-	// test_ft_strcmp();
-	// test_ft_write();
-	// test_ft_read();
-	test_ft_list_size();
-	test_ft_list_push_front();
-//	test_ft_list_sort();
-    return (0);
+	while (list)
+	{
+		printf("data = [%s] at [%p]\n", list->data, list->data);
+		list = list->next;
+	}
+}
+
+void    test_ft_list_push_front(void)
+{
+	t_list *head = ft_lstnew(strdup("head"));
+	ft_lstadd_back(&head, ft_lstnew(strdup("2e")));
+	printf("head = [%p]\n", head);
+	ft_list_push_front(&head, strdup("3e"));
+	printf("head = [%p]\n", head);
+	print_list(head);
 }

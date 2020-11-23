@@ -1,24 +1,51 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    ft_list_sort_bonus.s                               :+:    :+:             #
-#                                                      +:+                     #
-#    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2020/11/22 10:36:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/22 21:51:54 by lverdoes      ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
+;# **************************************************************************** #
+;#                                                                              #
+;#                                                         ::::::::             #
+;#    ft_list_sort_bonus.s                               :+:    :+:             #
+;#                                                      +:+                     #
+;#    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
+;#                                                    +#+                       #
+;#    Created: 2020/11/22 10:36:41 by lverdoes      #+#    #+#                  #
+;#    Updated: 2020/11/22 21:51:54 by lverdoes      ########   odam.nl          #
+;#                                                                              #
+;# **************************************************************************** #
 
-section	.text:
+section	.text
 	global	_ft_list_sort
 
 _ft_list_sort:					rdi = t_list **begin_list	rsi = int (*cmp)()
-	cmp		rdi, 0
-	je		ret
 	cmp		rsi, 0
 	je		ret
-	
+	cmp		rdi, 0
+	je		ret
+	mov		r8, [rdi]
+	mov		rdi, [rdi]
+	jmp		check_end
+
+check_end:
+	cmp		r8, 0
+	je		return
+
+go_to_next:
+	mov		r8, [r8 + 8]
+
+compare_element:
+	mov		r9, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

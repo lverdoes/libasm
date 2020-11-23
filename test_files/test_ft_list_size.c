@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   test_ft_lst_size.c                                 :+:    :+:            */
+/*   test_ft_list_size.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -26,43 +26,43 @@ void    print_list(t_list *head)
 	printf("end\n");
 }
 
-void    test_ft_lst_size(void)
+void    test_ft_list_size(void)
 {
     t_list *head = NULL;
 
-	printf("\nft_lst_size:\n\n");
+	printf("\nft_list_size:\n\n");
     
     
     printf("\tTest %d:", 0);
-    if (ft_lst_size(head) == ft_lstsize(head))
+    if (ft_list_size(head) == ft_lstsize(head))
         printf("\t[OK]\n");
     else
         printf("\t[FAIL]\n");
         
     printf("\tTest %d:", 1); 
     ft_lstadd_back(&head, ft_lstnew("hoi1"));
-    if (ft_lst_size(head) == ft_lstsize(head))
+    if (ft_list_size(head) == ft_lstsize(head))
         printf("\t[OK]\n");
     else
         printf("\t[FAIL]\n");
 
     printf("\tTest %d:", 2); 
     ft_lstadd_back(&head, ft_lstnew("hoi2"));
-    if (ft_lst_size(head) == ft_lstsize(head))
+    if (ft_list_size(head) == ft_lstsize(head))
         printf("\t[OK]\n");
     else
         printf("\t[FAIL]\n");
 
     printf("\tTest %d:", 3); 
     ft_lstadd_back(&head, ft_lstnew("hoi3"));
-    if (ft_lst_size(head) == ft_lstsize(head))
+    if (ft_list_size(head) == ft_lstsize(head))
         printf("\t[OK]\n");
     else
         printf("\t[FAIL]\n");
 	
     printf("\tTest %d:", 4); 
     ft_lstadd_back(&head, ft_lstnew("hoi4"));
-    if (ft_lst_size(head) == ft_lstsize(head))
+    if (ft_list_size(head) == ft_lstsize(head))
         printf("\t[OK]\n");
     else
         printf("\t[FAIL]\n");

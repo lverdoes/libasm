@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 11:25:29 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/21 20:31:22 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/23 18:09:49 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	test_ft_strcmp(void);
 void	test_ft_read(void);
 void	test_ft_write(void);
 
+
 //		bonus part
 
-void	test_ft_lst_size(void);
 void    test_ft_list_size(void);
 void    test_ft_list_push_front(void);
-void    test_ft_list_remove_if(void);
-void    test_ft_list_sort(void);
-void    test_ft_atoi_base(void);
+//void    test_ft_list_sort(void);
+//void    test_ft_list_remove_if(void);
+//void    test_ft_atoi_base(void);
 
 
 //		t_list utils
