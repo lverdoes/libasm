@@ -17,15 +17,15 @@ section .text
 _ft_list_push_front:				; rdi = **list, rsi = *data
 	cmp		rdi, 0					; check if head exists
 	je		return
-	push	rdi						; save head
-	push	rsi						; save data
-	push	rbp
-	mov		rbp, rsp
-	sub		rsp, 16
+	push	rdi
+	push	rsi
+	push	rbp						; *
+	mov		rbp, rsp				; *
+	sub		rsp, 16					; *
 	mov		rdi, 16					; param 1 = 16 (bytes for malloc)
 	call	_malloc					; rax points to new mem
-	mov		rsp, rbp
-	pop		rbp
+	mov		rsp, rbp				; *
+	pop		rbp						; *
 	pop		rsi
 	pop		rdi
 	cmp		rax, 0					; check if malloc was succesful
