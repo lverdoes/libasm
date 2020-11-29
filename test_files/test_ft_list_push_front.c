@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 17:51:55 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/23 20:46:23 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/29 13:34:18 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void    print_list(t_list *list)
 
 void    test_ft_list_push_front(void)
 {
-	t_list *head = ft_lstnew(strdup("head"));
-	ft_lstadd_back(&head, ft_lstnew(strdup("2e")));
-	printf("head = [%p]\n", head);
-	ft_list_push_front(&head, strdup("3e"));
-	printf("head = [%p]\n", head);
+	t_list *head = NULL;
+	
+	head = ft_lstnew(strdup("first head"));
+	ft_lstadd_back(&head, ft_lstnew(strdup("added to back")));
+	ft_list_push_front(&head, strdup("new head"));
 	print_list(head);
 }

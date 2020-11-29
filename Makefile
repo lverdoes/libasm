@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/29 13:35:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/23 21:40:42 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/29 13:53:16 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC = \
 	ft_list_size_bonus.o \
 	ft_list_push_front_bonus.o \
 	ft_list_sort_bonus.s
+#	ft_list_remove_if_bonus.o \
+#	ft_list_atoi_base_bonus.o
 
 TEST_SRC = \
 	./test_files/main.c \

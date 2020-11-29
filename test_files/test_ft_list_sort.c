@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:36:22 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/23 21:42:30 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/29 16:59:05 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@ static void    print_list(t_list *list)
 
 void    test_ft_list_sort(void)
 {
-	t_list *head = ft_lstnew(strdup("bbhead"));
-	ft_lstadd_back(&head, ft_lstnew(strdup("bbback")));
-	printf("head = [%p]\n", head);
-	ft_list_push_front(&head, strdup("bbbfrontpush"));
-	printf("head = [%p]\n", head);
+	t_list *head = NULL;
 	
+	head = 				  ft_lstnew(strdup("b"));
+	ft_lstadd_back(&head, ft_lstnew(strdup("d")));
+	ft_lstadd_back(&head, ft_lstnew(strdup("e")));
+	ft_lstadd_back(&head, ft_lstnew(strdup("a")));
+	ft_lstadd_back(&head, ft_lstnew(strdup("c")));
+
+	printf("list is unsorted:\n\n");
 	print_list(head);
 	ft_list_sort(&head, ft_strcmp);
+	
+	printf("list is sorted:\n\n");
 	print_list(head);
 }

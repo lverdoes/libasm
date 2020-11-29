@@ -10,90 +10,50 @@
 ;#                                                                              #
 ;# **************************************************************************** #
 
-;section	.text
-;	global	_ft_list_sort
-;
-;_ft_list_sort:					rdi = t_list **begin_list	rsi = int (*cmp)()
-;	cmp		rsi, 0
-;	je		ret
-;	cmp		rdi, 0
-;	je		ret
-;	mov		r8, [rdi]
-;	mov		rdi, [rdi]
-;	jmp		check_end
-;
-;check_end:
-;	cmp		r8, 0
-;	je		return
-;
-;go_to_next:
-;	mov		r8, [r8 + 8]
-;
-;compare_element:
-;	mov		r9,
+section	.text
+	global	_ft_list_sort
 
+_ft_list_sort:						; rdi = t_list **head, rsi = int (*cmp)()
+	cmp		rsi, 0					; if (!rsi)
+	je		return						;	return
+	cmp		rdi, 0					; if (!rdi)
+	je		return					;	return
+	mov		r10, [rdi]				; r10 = *head ; (set the left value)
+	mov		rdi, [rdi]				; rdi = *head
+	jmp		check_end
 
+go_to_next:
+	mov		rdi, [rdi + 8]			; rdi = rdi->next
 
+check_end:
+	cmp		rdi, 0					; if (!rdi)
+	je		return					;	return
 
+compare_element:
+	mov		r11, [rdi + 8]			; r11 = rdi->next ; (find the next element)
+	cmp		r11, 0					; if (!r11)
+	je		return					; 	return
+	push	rdi;					; save rdi
+	push	rsi;					; save rsi
+	mov		r14, rsi				; r14 = cmp()
+	mov		rdi, [rdi]				; rdi = rdi->content
+	mov		rsi, [r11]				; rsi = rdi->next->content
+	call	r14						; cmp(rdi, rsi)
+	pop		rsi						; retrieve rsi
+	pop		rdi						; retrieve rdi
+	cmp		rax, 0					; if (!cmp)
+	je		go_to_next				; 	restart loop for next elements
+	jg		swap					; swap if rdi is greater than rsi
+	jmp		go_to_next				; restart loop for next elements
 
-;	outer loop loops through list, inner loop get lowest value and puts it at front
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-section .text
-	global _ft_list_sort
-
-_ft_list_sort:
-	cmp rdi, 0
-	je return
-	cmp rsi, 0
-	je return
-	mov r10, [rdi]			; set the list in r10
-	mov rdi, [rdi]			; set the first element from list in rdi
-	jmp check_end_list
-next_element:
-	mov	rdi, [rdi + 8]		; list->next
-check_end_list:
-	cmp rdi, 0				; check if element is end of list
-	je return
-compare_loop:
-	mov r11, [rdi + 8]		; 2nd element to compare takes list->next
-	cmp r11, 0				; check if the second element is end of the list
-	je return
-	push rdi				; save the current list
-	push rsi				; save the pointer to function
-	mov r14, rsi			; r10 takes the pointer to function
-	mov rdi, [rdi]			; put first element in first argument
-	mov rsi, [r11]			; put second element in second argument
-	call r14				; call the compare function
-	pop rsi
-	pop rdi
-	cmp rax, 0				; check if the compare was equal
-	je next_element
-	jg swap
-	jmp next_element
 swap:
-	mov r12, [rdi]			; set the first element in tmp1
-	mov r13, [r11]			; set the second element in tmp2
-	mov [r11], r12			; set tmp1 in second element
-	mov [rdi], r13			; set tmp2 in first element
+	mov r12, [rdi]					; set the first element in tmp1
+	mov r13, [r11]					; set the second element in tmp2
+	mov [r11], r12					; set tmp1 in second element
+	mov [rdi], r13					; set tmp2 in first element
 	mov rdi, r10
-	jmp compare_loop
+	jmp compare_element
+
 return:
 	mov rax, 0
 	ret
