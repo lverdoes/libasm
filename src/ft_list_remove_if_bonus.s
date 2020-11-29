@@ -6,39 +6,79 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/29 16:50:42 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/29 17:38:16 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/29 23:59:05 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 section .text
 	global	_ft_list_remove_if
+	extern	_free
 
 _ft_list_remove_if:         rdi = t_list **head, rsi = void *data_ref, rdx = cmp
-	cmp		rdi, 0
+	cmp		rdi, 0				;
 	je		return
 	cmp		rsi, 0
 	je		return
 	cmp		rdx, 0
 	je		return
-	mov		r8, [rdi]
+	mov		r9, [rdi]
 	jmp		compare_element
 
-go_to_next:
+next_element:
+	mov		r8, r9
+	mov		r9, [r9 + 8]
 	
+compare_element:
+	cmp		r9, 0
+	je		return
+	push	rdi
+	push	rsi
+	push	rdx
+	push	r8
+	push	r9
+	mov		rdi, [r9]
+	call	rdx
+	pop		r9
+	pop		r8
+	pop		rdx
+	pop		rsi
+	pop		rdi
+	cmp		rax, 0				; if (rax)
+	jne		next_element		; check next element
+	cmp		r9, [rdi]			; if (r9 == *head)
+	jne		link_element		; link prev to next
+	mov		r10, [r9 + 8]		; r10 = (*head)->next
+	mov		[rdi], r10			; *head = r10
+	jmp		free_element
 
+link_element:
+	mov		r10, [r9 + 8]
+	mov		[r8 + 8], r10
+	
+free_element:
 
+	mov		r11, r9
+	mov		r9, [r9 + 8]
+	push	rdi
+	push	rsi
+	push	rdx
+	push	r8
+	push	r9
+	mov		rdi, r11
+	call	free
+	pop		r9
+	pop		r8
+	pop		rdx
+	pop		rsi
+	pop		rdi
+	jmp		compare_element
+	
+return:
+	ret
 
-
-
-
-
-; rdi = **begin_list
-; rsi = data to compare with
-; rdx = pointer to compare function
 ; r8 = previous element
 ; r9 = current element
 ; r10 = tmp
-;
 ;_ft_list_remove_if:
 ;	cmp rdi, 0
 ;	je return

@@ -74,7 +74,13 @@ _ft_atoi_base:
 ;	cmp BYTE [rsi + r15], r13b	; check if there are duplicate chars in base
 ;	je end
 ;	jmp inc_check_base_dup
-;check_valid_chars:
+;check_valid_chars:             ; dit kan korter met 2 cmp funcs
+                                ; check if < 9
+                                ; check if < 13
+                                ; check if == 32
+                                ; check if == 43
+                                ; check if == 45
+                                
 ;	cmp BYTE [rsi + r15], 45	; check if a - is found
 ;	je end
 ;	cmp BYTE [rsi + r15], 43	; check if a + is found
