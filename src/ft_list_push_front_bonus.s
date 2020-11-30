@@ -15,8 +15,8 @@ section .text
 	extern	_malloc
 
 _ft_list_push_front:				; rdi = **head, rsi = *data
-	cmp		rdi, 0					; 	if (!head)
-	je		return					; return
+	cmp		rdi, 0					; if (!head)
+	je		return					; 	return
 	push	rdi						; save rdi
 	push	rsi						; save rsi
 	push	rsi						; push for stack alignment

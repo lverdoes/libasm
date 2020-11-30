@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/21 14:28:48 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/21 19:55:51 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/30 18:07:13 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,49 @@ int		ft_lstsize(t_list *lst)
 		i++;
 	}
 	return (i);
+}
+
+static int qb1t0_isblank(int c) 
+{
+  return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+	  || c == ' ');
+}
+
+
+static int qb1t0_ind(char c, const char *str)
+{
+  int i;
+
+  i = 0;
+  while (str[i] && str[i] != c)
+    i++;
+  return (i);
+}
+
+static int qb1t0_strlen(const char *s, int a)
+{
+  int i = 0;
+  while (s[i])
+    i++;
+  return (i);
+}
+
+int qb1t0_atoi_base(const char *nptr, const char *base)
+{
+  int result;
+  int neg;
+  int blen;
+
+  result = 0;
+  blen = qb1t0_strlen(base, 0);
+  if (blen < 2)
+    return (0);
+  while (qb1t0_isblank(*nptr))
+    nptr++;
+  neg = *nptr == '-';
+  if (*nptr == '+' || *nptr == '-')
+    nptr++;
+  while (qb1t0_ind(*nptr, base) < blen)
+    result = result * blen - qb1t0_ind(*nptr++, base);
+  return (neg ? result : -result);
 }

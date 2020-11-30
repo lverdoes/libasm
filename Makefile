@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/29 13:35:41 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/29 13:53:16 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/30 15:02:40 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,9 @@ SRC = \
 	ft_write.o \
 	ft_list_size_bonus.o \
 	ft_list_push_front_bonus.o \
-	ft_list_sort_bonus.s
-#	ft_list_remove_if_bonus.o \
-#	ft_list_atoi_base_bonus.o
+	ft_list_sort_bonus.s \
+	ft_list_remove_if_bonus.o \
+	ft_atoi_base_bonus.o
 
 TEST_SRC = \
 	./test_files/main.c \
@@ -39,9 +39,9 @@ TEST_SRC = \
 	./test_files/test_ft_write.c \
 	./test_files/test_ft_list_size.c \
 	./test_files/test_ft_list_push_front.c \
-	./test_files/test_ft_list_sort.c
-#	./test_files/test_ft_list_remove_if.c \
-#	./test_files/test_ft_atoi_base.c
+	./test_files/test_ft_list_sort.c \
+	./test_files/test_ft_list_remove_if.c \
+	./test_files/test_ft_atoi_base.c
 	
 OBJ = $(addprefix $(OBJDIR), $(SRC:.s=.o))
 

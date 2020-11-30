@@ -11,138 +11,114 @@
 ;# **************************************************************************** #
 
 section .text
-    global  _ft_atoi_base
+	global  _ft_atoi_base
 
-_ft_atoi_base:
-    xor     rax, rax
+_ft_atoi_base:                  		; rdi = char *str,    rsi = char *base
+	cmp     rdi, 0	                
+	je      end						
+	cmp     rsi, 0					
+	je      end	
+	xor		rax, rax					; ret = 0	
+	xor     rcx, rcx           		 	; i = 0		index of *str
+	xor		rdx, rdx           		 	; negative is false/off
+	xor     r15, r15            		; j = 0		index of *base
+	jmp		check_base
+
+incr_base_index:
+	add		r15, 1
+
+check_base:
+	movsx	r10, BYTE [rsi + r15]
+	cmp		r10, 0
+	je		check_base_len
+	mov		r14, r15
+
+incr_check_base_dup:
+	add		r14, 1
+
+check_base_dup:
+	movsx	r11, BYTE [rsi + r14]
+	cmp		r11, 0
+	je		check_invalid_chars
+	movsx	r12, BYTE [rsi + r15]
+	cmp		r11, r12
+	je		end
+	jmp		incr_check_base_dup
+
+check_invalid_chars:
+	movsx	r13, BYTE [rsi + r15]
+	cmp		r13, 9
+	je		end
+	cmp		r13, 13
+	je		end
+	cmp		r13, 45
+	je		end
+	cmp		r13, 43
+	je		end
+	cmp		r13, 32
+	je		end
+	jmp		incr_base_index
 
 
+check_base_len:
+	cmp		r15, 1
+	jle		end
+	jmp		check_white_space
 
+incr_white_space:
+	add		rcx, 1
 
+check_white_space:
+	movsx	r10, BYTE [rdi + rcx]
+	cmp		r10, 32
+	je		incr_white_space
+	cmp		r10, 9
+	jl		check_sign
+	cmp		r10, 13
+	jg		check_sign
+	jmp		incr_white_space
 
+check_sign:
+	movsx	r10, BYTE [rdi + rcx]
+	cmp		r10, 45						; check minus '-'
+	je		sign_negative
+	cmp		r10, 43						; check plus '+'
+	je		incr_str_index
+	jmp		atoi						; else, start with numbers
 
+sign_negative:
+	mov		rdx, 1						; negative is true/on
 
+incr_str_index:
+	add		rcx, 1
 
+atoi:
+	movsx	r10, BYTE [rdi + rcx]
+	cmp		r10, 0
+	je		end
+	xor		r12, r12					; index_2 for base
+	jmp		convert
 
+incr_base_index_2:
+	add		r12, 1
 
+convert:
+	movsx	r9, BYTE [rsi + r12]
+	cmp		r9, 0
+	je		end
+	movsx	r11, BYTE [rdi + rcx]
+	cmp		r11, r9
+	jne		incr_base_index_2
 
+calc_ret:
+	imul	rax, r15
+	add		rax, r12
+	jmp		incr_str_index
 
+end:
+	cmp		rdx, 0
+	je		return
+	neg		rax
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;section .text
-;	global	_ft_atoi_base
-;
-;_ft_atoi_base:
-;	xor rax, rax				; rax = 0
-;	cmp rdi, 0					; check if str is 0
-;	je end						; if zero jump to end
-;	cmp rsi, 0					; check if base is 0
-;	je end						; if zero jump to end
-;	xor rdx, rdx				; using rdx for sign (neg/pos)
-;	xor r15, r15				; base_len = 0
-;	xor rcx, rcx				; i = 0
-;	jmp check_base
-;inc_base_index1:
-;	inc r15						; base_len++
-;check_base:
-;	cmp BYTE [rsi + r15], 0		; check if \0 is found in base
-;	je check_base_len			; if found, base has valid chars
-;	mov r14, r15				; put cur base index in tmp
-;inc_check_base_dup:
-;	inc r14						; tmp base index++
-;check_base_dup:
-;	cmp BYTE [rsi + r14], 0		; check if \0 is found in base + 1
-;	je check_valid_chars
-;	mov r13b, [rsi + r14]		; put cur base char in r13b
-;	cmp BYTE [rsi + r15], r13b	; check if there are duplicate chars in base
-;	je end
-;	jmp inc_check_base_dup
-;check_valid_chars:             ; dit kan korter met 2 cmp funcs
-                                ; check if < 9
-                                ; check if < 13
-                                ; check if == 32
-                                ; check if == 43
-                                ; check if == 45
-                                
-;	cmp BYTE [rsi + r15], 45	; check if a - is found
-;	je end
-;	cmp BYTE [rsi + r15], 43	; check if a + is found
-;	je end
-;	cmp BYTE [rsi + r15], 32	; check if a space is found
-;	je end
-;	cmp BYTE [rsi + r15], 9		; check if \t is found
-;	je end
-;	cmp BYTE [rsi + r15], 10	; check if \n is found
-;	je end
-;	cmp BYTE [rsi + r15], 11	; check if \r is found
-;	je end
-;	cmp BYTE [rsi + r15], 12	; check if \v is found
-;	je end
-;	cmp BYTE [rsi + r15], 13	; check if \f is found
-;	je end
-;	jmp inc_base_index1			; go back to base_inc
-;check_base_len:
-;	cmp r15, 1					; check if the base len is 1 or less
-;	jle end						; if not true, base has valid len
-;	jmp white_space				; check for white spaces
-;inc_white_space:
-;	inc rcx						; i++;
-;white_space:
-;	cmp BYTE [rdi + rcx], 32	; check if space is found
-;	je inc_white_space
-;	cmp BYTE [rdi + rcx], 9		; check the other white spaces (9 -13)
-;	jl check_sign
-;	cmp BYTE [rdi + rcx], 13
-;	jg check_sign
-;	jmp inc_white_space
-;check_sign:
-;	cmp BYTE [rdi + rcx], 45	; check if a - is found
-;	je neg_sign
-;	cmp BYTE [rdi + rcx], 43	; check if a + is found
-;	je inc_str_index
-;	jmp atoi_nb
-;neg_sign:
-;	mov rdx, 1					; set value to -1
-;inc_str_index:
-;	inc rcx
-;atoi_nb:
-;	cmp BYTE [rdi + rcx], 0		; check if \0 is found in str
-;	je end
-;	xor r12, r12				; set index in str to 0
-;	jmp convert_nb_with_base
-;inc_base_index2:
-;	inc r12
-;convert_nb_with_base:
-;	mov	r11b, BYTE [rsi +r12]	; put cur str char in r11b
-;	cmp r11b, 0					; check if \0 is found
-;	je end						; if found, we got our return value
-;	cmp BYTE [rdi + rcx], r11b	; check if cur str char exist in base
-;	jne	inc_base_index2			; if equal, convert it with the base
-;create_return_value:
-;	;mul r15
-;	imul rax, r15				; multiply rax with our base length
-;	add rax, r12				; add cur number to our rax
-;	jmp inc_str_index
-;end:
-;	cmp rdx, 0					; check if number has to be negative
-;	je return
-;	neg rax						; if rdx = 1, rax = -rax
-;return:
-;	ret
+return:
+	ret
