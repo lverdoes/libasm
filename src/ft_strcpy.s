@@ -13,7 +13,7 @@
 section .text
 	global  _ft_strcpy
 
-_ft_strcpy:
+_ft_strcpy:							; rdi = char *dst, rsi = char *src
 	xor 	rcx, rcx
 
 loop:

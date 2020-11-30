@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 17:51:55 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/29 13:34:18 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/30 21:07:56 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void    test_ft_list_push_front(void)
 	head = ft_lstnew(strdup("first head"));
 	ft_lstadd_back(&head, ft_lstnew(strdup("added to back")));
 	ft_list_push_front(&head, strdup("new head"));
+	ft_list_push_front(&head, strdup("newer head"));
+	ft_list_push_front(&head, strdup("even newer head!"));
 	print_list(head);
 }

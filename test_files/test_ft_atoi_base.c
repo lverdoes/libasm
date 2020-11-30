@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/30 13:06:44 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/30 19:45:07 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/11/30 21:13:51 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,43 @@ void	test_ft_atoi_base(void)
 	
 	str[0] = ft_strdup("5");
 	base[0] = ft_strdup("0123456789");
+	
 	str[1] = ft_strdup("a");
 	base[1] = ft_strdup("0123456789abcdef");
+	
 	str[2] = ft_strdup("ff");
 	base[2] = ft_strdup("0123456789abcdef");
+	
 	str[3] = ft_strdup("a");
 	base[3] = ft_strdup("abcdefghijklmnopqrstuvwxyz");
+	
 	str[4] = ft_strdup("z");
 	base[4] = ft_strdup("abcdefghijklmnopqrstuvwxyz");
+	
 	str[5] = ft_strdup("az");
 	base[5] = ft_strdup("abcdefghijklmnopqrstuvwxyz");
+	
 	str[6] = ft_strdup("aza");
 	base[6] = ft_strdup("abcdefghijklmnopqrstuvwxyz");
+	
 	str[7] = ft_strdup("\t  -10");
 	base[7] = ft_strdup("0123456789");
+	
 	str[8] = ft_strdup("\t  -+10");
 	base[8] = ft_strdup("0123456789");
+	
 	str[9] = ft_strdup("wat?");
 	base[9] = ft_strdup("0123456789");
+	
 	str[10] = ft_strdup("1001");
 	base[10] = ft_strdup("012");
+	
 	str[11] = ft_strdup("314");
 	base[11] = ft_strdup("314");
+	
 	str[12] = ft_strdup("114");
 	base[12] = ft_strdup("314");
+	
 
 	int i = 0;
 	while (i < tests)
