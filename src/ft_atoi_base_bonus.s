@@ -19,19 +19,19 @@ _ft_atoi_base:                  		; rdi = char *str,    rsi = char *base
 	cmp     rsi, 0					
 	je      end	
 	xor		rax, rax					; ret = 0	
-	xor     rcx, rcx           		 	; i = 0		index of *str
-	xor		rdx, rdx           		 	; negative is false/off
-	xor     r15, r15            		; j = 0		index of *base
+	xor     rcx, rcx           		 	; i = 0			index of *str
+	xor     r15, r15            		; j = 0			index of *base
+	xor		rdx, rdx           		 	; neg = 0		negative is false/off
 	jmp		check_base
 
 incr_base_index:
-	add		r15, 1
+	add		r15, 1						; j++;
 
 check_base:
-	movsx	r10, BYTE [rsi + r15]
-	cmp		r10, 0
-	je		check_base_len
-	mov		r14, r15
+	movsx	r10, BYTE [rsi + r15]		; r10 = base[j]
+	cmp		r10, 0						; if (base[j] == '\0')
+	je		end_of_base					; 		go to end of base 
+	mov		r14, r15					; create a tmp index for base
 
 incr_check_base_dup:
 	add		r14, 1
@@ -59,22 +59,21 @@ check_invalid_chars:
 	je		end
 	jmp		incr_base_index
 
-
-check_base_len:
-	cmp		r15, 1
+end_of_base:
+	cmp		r15, 1						; base should not be empty or size 1
 	jle		end
 	jmp		check_white_space
 
 incr_white_space:
-	add		rcx, 1
+	add		rcx, 1						; i++
 
 check_white_space:
-	movsx	r10, BYTE [rdi + rcx]
-	cmp		r10, 32
+	movsx	r10, BYTE [rdi + rcx]		; r10 = str[i]
+	cmp		r10, 32						; check for space ' '
 	je		incr_white_space
-	cmp		r10, 9
+	cmp		r10, 9						; if str[i] < 9, it's not a whitespace
 	jl		check_sign
-	cmp		r10, 13
+	cmp		r10, 13						; if str[i] > 13, it's not a whitespace
 	jg		check_sign
 	jmp		incr_white_space
 
@@ -90,29 +89,29 @@ sign_negative:
 	mov		rdx, 1						; negative is true/on
 
 incr_str_index:
-	add		rcx, 1
+	add		rcx, 1						; i++
 
 atoi:
-	movsx	r10, BYTE [rdi + rcx]
+	movsx	r10, BYTE [rdi + rcx]		; r10 = str[i]
 	cmp		r10, 0
 	je		end
-	xor		r12, r12					; index_2 for base
+	xor		r12, r12					; k = 0, new index for inner loop
 	jmp		convert
 
 incr_base_index_2:
 	add		r12, 1
 
-convert:
-	movsx	r9, BYTE [rsi + r12]
+convert:								; loop through *base untill str[i] == base[k]
+	movsx	r9, BYTE [rsi + r12]		; r9 = base[k]
 	cmp		r9, 0
 	je		end
-	movsx	r11, BYTE [rdi + rcx]
-	cmp		r11, r9
+	movsx	r11, BYTE [rdi + rcx]		; r11 = str[i]
+	cmp		r11, r9						; if str[i] == base[k], go to calc_ret
 	jne		incr_base_index_2
 
-calc_ret:
-	imul	rax, r15
-	add		rax, r12
+calc_ret:								; multiply and add up the index position
+	imul	rax, r15					; ret = ret * base_len
+	add		rax, r12					; ret = ret + k
 	jmp		incr_str_index
 
 end:
