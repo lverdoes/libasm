@@ -6,7 +6,7 @@
 #    By: lverdoes <lverdoes@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/29 16:50:42 by lverdoes      #+#    #+#                  #
-#    Updated: 2020/11/29 23:59:05 by lverdoes      ########   odam.nl          #
+#    Updated: 2020/11/30 08:09:10 by lverdoes      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ section .text
 	extern	_free
 
 _ft_list_remove_if:         rdi = t_list **head, rsi = void *data_ref, rdx = cmp
-	cmp		rdi, 0				;
+	cmp		rdi, 0
 	je		return
 	cmp		rsi, 0
 	je		return
@@ -25,47 +25,46 @@ _ft_list_remove_if:         rdi = t_list **head, rsi = void *data_ref, rdx = cmp
 	jmp		compare_element
 
 next_element:
-	mov		r8, r9
-	mov		r9, [r9 + 8]
+	mov		r8, r9				; r8 = r9 (save r8 as previous)
+	mov		r9, [r9 + 8]		; r9 = r9->next (go to next)
 	
 compare_element:
-	cmp		r9, 0
-	je		return
+	cmp		r9, 0				; if (!r9)
+	je		return				;	return
 	push	rdi
 	push	rsi
 	push	rdx
 	push	r8
 	push	r9
-	mov		rdi, [r9]
-	call	rdx
+	mov		rdi, [r9]			; rdi = r9->content
+	call	rdx					; compare r9 with rsi
 	pop		r9
 	pop		r8
 	pop		rdx
 	pop		rsi
 	pop		rdi
-	cmp		rax, 0				; if (rax)
-	jne		next_element		; check next element
+	cmp		rax, 0				; check output return of cmp
+	jne		next_element		; 	if not equal, next element
 	cmp		r9, [rdi]			; if (r9 == *head)
-	jne		link_element		; link prev to next
+	jne		link_element		; 	if not equal, link prev to next
 	mov		r10, [r9 + 8]		; r10 = (*head)->next
 	mov		[rdi], r10			; *head = r10
 	jmp		free_element
 
 link_element:
-	mov		r10, [r9 + 8]
-	mov		[r8 + 8], r10
+	mov		r10, [r9 + 8]		; r10 = r9->next
+	mov		[r8 + 8], r10		; prev->next = r10
 	
 free_element:
-
-	mov		r11, r9
-	mov		r9, [r9 + 8]
+	mov		r11, r9				; store r9 in a tmp
+	mov		r9, [r9 + 8]		; r9 = r9->next
 	push	rdi
 	push	rsi
 	push	rdx
 	push	r8
 	push	r9
-	mov		rdi, r11
-	call	free
+	mov		rdi, r11			; rdi = r11
+	call	free				; free(rdi);
 	pop		r9
 	pop		r8
 	pop		rdx
@@ -75,6 +74,11 @@ free_element:
 	
 return:
 	ret
+
+
+
+
+
 
 ; r8 = previous element
 ; r9 = current element
