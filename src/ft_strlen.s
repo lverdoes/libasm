@@ -19,7 +19,7 @@ _ft_strlen:
 loop:
 	cmp 	BYTE [rdi + rax], 0
 	je		return
-	inc		rax
+	add		rax, 1
 	jmp		loop
 
 return:

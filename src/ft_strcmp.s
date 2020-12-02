@@ -25,7 +25,7 @@ loop:
 	je		return
 	cmp 	rax, rdx
 	jne		return
-	inc		rcx
+	add		rcx, 1
 	jmp		loop
 
 return:

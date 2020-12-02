@@ -13,13 +13,15 @@
 section .text
 	global	_ft_list_size
 
+;params		rdi = t_list *begin_list
+
 _ft_list_size:
 	xor		rax, rax
 
 loop:
 	cmp		rdi, 0
 	je		return
-	inc		rax
+	add		rax, 1
 	mov		rdi, [rdi + 8]
 	jmp		loop
 

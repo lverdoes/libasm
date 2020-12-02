@@ -16,16 +16,18 @@ section .text
 	extern	_ft_strcpy
 	extern	_malloc
 
-_ft_strdup:						; rdi = char *s1
+;params		rdi = char *src
+
+_ft_strdup:
 	call 	_ft_strlen			; rax = ft_strlen(rdi)
-	push	rdi					; save s1
+	push	rdi					; save src
 	mov		rdi, rax			; rdi = rax
-	inc		rdi
+	add		rdi, 1
 	call	_malloc				; rax = malloc(rdi)
 	cmp		rax, 0				; malloc check
 	je		error
 	mov		rdi, rax			; rdi = void *malloced byte
-	pop		rsi					; rsi = s1
+	pop		rsi					; rsi = src
 	call	_ft_strcpy			; rax = ft_strcpy(rdi, rsi)
 	ret
 

@@ -14,17 +14,19 @@ section .text
 	global  _ft_write
 	extern  ___error
 
+;params		rdi = int fildes, rsi = const void *buf, rdx = size_t nbyte
+
 _ft_write:
-	mov		rax, 0x02000004
-	syscall
+	mov		rax, 0x02000004			; move syscall number for write to rax
+	syscall							; rax = write(rdi, rsi, rdx)
 	jc		error
 	ret
 
 error:
-	push	rbp
-	mov		rbx, rax
+	sub		rsp, 8					; stack alignment
+	mov		r8, rax					; save write return in r8
 	call	___error
-	mov		[rax], rbx
-	pop		rbp
+	mov		[rax], r8				; move r8 into errno ptr
+	add		rsp, 8					; stack alignment
 	mov		rax, -1
 	ret

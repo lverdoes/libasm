@@ -13,12 +13,17 @@
 section	.text
 	global	_ft_list_sort
 
-_ft_list_sort:						; rdi = t_list **head, rsi = int (*cmp)()
+;params		rdi = t_list **head, rsi = int (*cmp)()
+
+_ft_list_sort:
 	cmp		rsi, 0					; if (!rsi)
-	je		return						;	return
+	je		return					;	return
 	cmp		rdi, 0					; if (!rdi)
 	je		return					;	return
-	mov		r10, [rdi]				; r10 = *head ; (set the left value)
+	push	r12
+	push	r13
+	push	r14
+	mov		r10, [rdi]				; r10 = *head
 	mov		rdi, [rdi]				; rdi = *head
 	jmp		check_end
 
@@ -30,7 +35,7 @@ check_end:
 	je		return					;	return
 
 compare_element:
-	mov		r11, [rdi + 8]			; r11 = rdi->next ; (find the next element)
+	mov		r11, [rdi + 8]			; r11 = rdi->next
 	cmp		r11, 0					; if (!r11)
 	je		return					; 	return
 	push	rdi;					; save rdi
@@ -47,13 +52,16 @@ compare_element:
 	jmp		go_to_next				; restart loop for next elements
 
 swap:
-	mov r12, [rdi]					; set the first element in tmp1
-	mov r13, [r11]					; set the second element in tmp2
-	mov [r11], r12					; set tmp1 in second element
-	mov [rdi], r13					; set tmp2 in first element
-	mov rdi, r10
-	jmp compare_element
+	mov		r12, [rdi]				; set the first element in tmp1
+	mov		r13, [r11]				; set the second element in tmp2
+	mov		[r11], r12				; set tmp1 in second element
+	mov		[rdi], r13				; set tmp2 in first element
+	mov		rdi, r10				; 
+	jmp		compare_element
 
 return:
-	mov rax, 0
+	pop		r14
+	pop		r13
+	pop		r12
+	mov		rax, 0
 	ret

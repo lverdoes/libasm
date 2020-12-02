@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:36:22 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/29 16:59:05 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/12/02 22:49:58 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void    print_list(t_list *list)
 
 void    test_ft_list_sort(void)
 {
+	printf("\nft_list_sort:\n\n");
+	
 	t_list *head = NULL;
 	
 	head = 				  ft_lstnew(strdup("b"));

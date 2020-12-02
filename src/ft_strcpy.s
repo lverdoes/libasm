@@ -13,7 +13,9 @@
 section .text
 	global  _ft_strcpy
 
-_ft_strcpy:							; rdi = char *dst, rsi = char *src
+;params		rdi = char *dst, rsi = char *src
+
+_ft_strcpy:
 	xor 	rcx, rcx
 
 loop:
@@ -21,7 +23,7 @@ loop:
 	mov		BYTE [rdi + rcx], dl
 	cmp		BYTE dl, 0
 	je		return
-	inc		rcx
+	add		rcx, 1
 	jmp		loop
 
 return:

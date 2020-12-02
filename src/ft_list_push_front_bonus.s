@@ -14,19 +14,21 @@ section .text
 	global	_ft_list_push_front
 	extern	_malloc
 
-_ft_list_push_front:				; rdi = **head, rsi = *data
+;params:	rdi = **head, rsi = *data
+
+_ft_list_push_front:
 	cmp		rdi, 0					; if (!head)
 	je		return					; 	return
 	push	rdi						; save rdi
 	push	rsi						; save rsi
-	push	rsi						; push for stack alignment
+	sub		rsp, 8					; stack alignment
 	mov		rdi, 16					; rdi = 16
 	call	_malloc					; rax = malloc(rdi)
-	pop		rsi						; pop for stack alignment
+	add		rsp, 8					; stack alignment
 	pop		rsi						; retrieve rsi
 	pop		rdi						; retrive rdi
 	cmp		rax, 0					; if (!rax)
-	je		return					; 	return
+	je		return					; 	return if malloc failed
 	mov		[rax], rsi				; rax->content = rsi
 	mov		r8, [rdi]				; r8 = *head
 	mov		[rax + 8], r8			; rax->next = *head

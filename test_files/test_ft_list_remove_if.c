@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/30 11:45:44 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/30 12:01:48 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/12/02 22:49:42 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void    print_list(t_list *list)
 
 void	test_ft_list_remove_if(void)
 {
+	printf("\nft_list_remove:\n\n");
+	
 //		make a list of strings
 
 	t_list *head = ft_lstnew(strdup("head 00"));

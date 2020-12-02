@@ -14,23 +14,19 @@ section .text
 	global  _ft_read
 	extern	___error
 
-_ft_read:					; rdi = int fildes, rsi = void *buf, rdx = size_t nbyte
-	mov		rax, 0x02000003	; move syscall number for read to rax
-	syscall					; rax = read(rdi, rsi, rdx)
+;params		rdi = int fildes, rsi = void *buf, rdx = size_t nbyte
+
+_ft_read:					
+	mov		rax, 0x02000003			; move syscall number for read to rax
+	syscall							; rax = read(rdi, rsi, rdx)
 	jc		error
 	ret
 
 error:
-;	push	rax
-;	call	___error
-;	pop		rax
-;	mov		rax, -1
-;	ret
-
-	push	rbp
-	mov		rbx, rax
+	sub		rsp, 8					; stack alignment
+	mov		r8, rax					; save read return in r8
 	call	___error
-	mov		[rax], rbx
-	pop		rbp
+	mov		[rax], r8				; move r8 into errno ptr
+	add		rsp, 8					; stack alignment
 	mov		rax, -1
 	ret

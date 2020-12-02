@@ -6,7 +6,7 @@
 /*   By: lverdoes <lverdoes@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/30 13:06:44 by lverdoes      #+#    #+#                 */
-/*   Updated: 2020/11/30 21:13:51 by lverdoes      ########   odam.nl         */
+/*   Updated: 2020/12/02 22:49:12 by lverdoes      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 void	test_ft_atoi_base(void)
 {
+	printf("\nft_atoi_base:\n\n");
+
 	int tests = 13;
 	char *str[tests];
 	char *base[tests];
@@ -78,11 +80,18 @@ void	test_ft_atoi_base(void)
 	
 
 	int i = 0;
+	int t1;
+	int t2;
 	while (i < tests)
 	{
-		printf("\nTest [%.2d]:\n", i);
+		t1 = ft_atoi_base(str[i], base[i]);
+		t2 = qb1t0_atoi_base(str[i], base[i]);
+		if (t1 == t2)
+			printf("\nTest [%.2d]:\t[OK]\n", i);
+		else
+			printf("\nTest [%.2d]:\t[FAIL]\n", i);
 		printf("str  = [%s]\nbase = [%s]\nmine = [%d]\nreal = [%d]\n", \
-			str[i], base[i], ft_atoi_base(str[i], base[i]), qb1t0_atoi_base(str[i], base[i]));
+			str[i], base[i], t1, t2);
 		i++;
 	}
 }

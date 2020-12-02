@@ -14,7 +14,9 @@ section .text
 	global	_ft_list_remove_if
 	extern	_free
 
-_ft_list_remove_if:         	; rdi = t_list **head, rsi = void *data_ref, rdx = cmp
+;params: 	rdi = t_list **head, rsi = void *data_ref, rdx = cmp
+
+_ft_list_remove_if:
 	cmp		rdi, 0
 	je		return
 	cmp		rsi, 0
@@ -31,7 +33,7 @@ next_element:
 compare_element:
 	cmp		r9, 0				; if (!r9)
 	je		return				;	return
-	push	rdi
+	push	rdi					; store the **head
 	push	rsi
 	push	rdx
 	push	r8
@@ -42,7 +44,7 @@ compare_element:
 	pop		r8
 	pop		rdx
 	pop		rsi
-	pop		rdi
+	pop		rdi					; retrieve **head
 	cmp		rax, 0				; check output return of cmp
 	jne		next_element		; 	if not equal, next element
 	cmp		r9, [rdi]			; if (r9 == *head)

@@ -13,11 +13,17 @@
 section .text
 	global  _ft_atoi_base
 
-_ft_atoi_base:                  		; rdi = char *str,    rsi = char *base
+;params:	rdi = char *str,    rsi = char *base
+
+_ft_atoi_base:
 	cmp     rdi, 0	                
 	je      end						
 	cmp     rsi, 0					
 	je      end	
+	push	r12
+	push	r13
+	push	r14
+	push	r15
 	xor		rax, rax					; ret = 0	
 	xor     rcx, rcx           		 	; i = 0			index of *str
 	xor     r15, r15            		; j = 0			index of *base
@@ -95,7 +101,7 @@ atoi:
 	movsx	r10, BYTE [rdi + rcx]		; r10 = str[i]
 	cmp		r10, 0
 	je		end
-	xor		r12, r12					; k = 0, new index for inner loop
+	xor		r12, r12					; k = 0, reset index for inner loop
 	jmp		convert
 
 incr_base_index_2:
@@ -120,4 +126,8 @@ end:
 	neg		rax
 
 return:
+	pop		r15
+	pop		r14
+	pop		r13
+	pop		r12
 	ret
